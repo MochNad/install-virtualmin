@@ -18,7 +18,7 @@ wget https://software.virtualmin.com/gpl/scripts/virtualmin-install.sh
 # Step 2: Run the Install Script and Configure Virtualmin
 clear
 echo "Step 2: Running the Install Script and Configuring Virtualmin..."
-run_command sudo sh virtualmin-install.sh
+echo "y" | run_command sudo sh virtualmin-install.sh
 
 # Step 3: Enable sury/php repository
 clear
@@ -31,7 +31,7 @@ run_command sudo apt-get update
 # Step 4: Install additional PHP packages
 clear
 echo "Step 4: Installing additional PHP packages..."
-run_command sudo apt-get install php8.1-{cgi,cli,fpm,pdo,gd,mbstring,mysqlnd,opcache,xml,zip}
+echo "y" | run_command sudo apt-get install php8.1-{cgi,cli,fpm,pdo,gd,mbstring,mysqlnd,opcache,xml,zip}
 
 # Step 5: Installation complete
 clear
