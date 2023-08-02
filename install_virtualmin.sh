@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Function to run commands and wait for completion
+# Function to run commands and check for errors
 run_command() {
     "$@"
     local exit_code=$?
@@ -15,10 +15,16 @@ clear
 echo "Step 1: Downloading Virtualmin Install Script..."
 wget https://software.virtualmin.com/gpl/scripts/virtualmin-install.sh
 
+# Prompt the user to continue to the next step
+read -p "Press Enter to continue to Step 2..."
+
 # Step 2: Run the Install Script and Configure Virtualmin
 clear
 echo "Step 2: Running the Install Script and Configuring Virtualmin..."
 run_command yes | sudo sh virtualmin-install.sh
+
+# Prompt the user to continue to the next step
+read -p "Press Enter to continue to Step 3..."
 
 # Step 3: Enable sury/php repository
 clear
@@ -28,10 +34,16 @@ run_command yes | sudo curl -sSL -o /etc/apt/trusted.gpg.d/php.gpg https://packa
 run_command yes | sudo sh -c 'echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/sury-debian-php-$(lsb_release -sc).list'
 run_command yes | sudo apt-get update
 
+# Prompt the user to continue to the next step
+read -p "Press Enter to continue to Step 4..."
+
 # Step 4: Install additional PHP packages
 clear
 echo "Step 4: Installing additional PHP packages..."
 run_command sudo apt-get install php8.1-{cgi,cli,fpm,pdo,gd,mbstring,mysqlnd,opcache,xml,zip}
+
+# Prompt the user to continue to the next step
+read -p "Press Enter to continue to Step 5..."
 
 # Step 5: Installation complete
 clear
