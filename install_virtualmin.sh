@@ -19,7 +19,12 @@ read -p "Press Enter to continue to Step 2..."
 
 # Step 2: Run the Install Script and Configure Virtualmin
 echo "Step 2: Running the Install Script and Configuring Virtualmin..."
-run_command sudo sh virtualmin-install.sh
+expect -c '
+spawn sudo sh virtualmin-install.sh
+expect "Do you want to continue?" { send "y\r" }
+expect "Press ENTER to continue:" { send "\r" }
+expect eof
+'
 
 # Prompt the user to continue to the next step
 read -p "Press Enter to continue to Step 3..."
